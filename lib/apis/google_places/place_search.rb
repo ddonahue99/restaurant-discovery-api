@@ -1,8 +1,8 @@
-require './lib/apis/google_places/find_place'
+require './lib/apis/google_places/nearby_search'
 
 module GooglePlaces
   class PlaceSearch
-    include FindPlace
+    include NearbySearch
 
     BASE_URL = 'https://maps.googleapis.com/maps/api'.freeze
 

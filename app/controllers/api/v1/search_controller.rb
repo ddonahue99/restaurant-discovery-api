@@ -10,7 +10,8 @@ class Api::V1::SearchController < ApplicationController
     api = GooglePlaces::PlaceSearch.new()
 
     begin
-      @response = api.find_place(params[:keyword], Oj.load(params[:location]))
+      location_hash = Oj.load(params[:location]).symbolize_keys
+      @response = api.nearby_search(params[:keyword], location_hash)
       render json: @response
     rescue StandardError => error
       render json: {error: error}.to_json, status: 400

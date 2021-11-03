@@ -9,11 +9,11 @@ Create .env file (see similar .env.example included in the repo but change crede
 
 Add your google maps key to your config/credentials.yml.enc file:
 
-
 ```
 docker-compose run web credentials:edit
 google_places_api:[YOUR_KEY_HERE]
 ```
+
 
 ## Build docker
 
@@ -24,23 +24,26 @@ docker-compose run web rails db:migrate
 docker-compose run web rails db:seed
 ```
 
+
 ## Use the following User credentials for basic auth:
 
 Email: `paul@arrakis.com`
 
 Password: `gomjabbar`
 
+
 ## API testing
 `http://localhost:3000/api/v1/search`
 
 Params:
 
+`location` [Object]
+
 `keyword` [String]
 
-`location` [Object]
 
 ### Examples:
 
 keyword: pizza
 
-location: {"south": "-34.627041", "west": "-58.479310", "north":"-34.625743", "east": "-199.478704"}
+location: {"latitude": "45.51131890954784", "longitude": "-122.68486796248608"}
