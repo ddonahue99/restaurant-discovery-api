@@ -31,7 +31,7 @@ Email: `paul@arrakis.com`
 Password: `gomjabbar`
 
 ## API testing
-`http://localhost:3000/api/search`
+`http://localhost:3000/api/v1/search`
 
 Params:
 

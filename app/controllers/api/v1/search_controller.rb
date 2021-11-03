@@ -1,4 +1,4 @@
-class SearchController < ApplicationController
+class Api::V1::SearchController < ApplicationController
   before_action :authenticate_user!
 
   def create
@@ -8,7 +8,7 @@ class SearchController < ApplicationController
     end
 
     api = GooglePlaces::PlaceSearch.new()
-    
+
     begin
       @response = api.find_place(params[:keyword], Oj.load(params[:location]))
       render json: @response
