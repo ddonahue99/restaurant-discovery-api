@@ -177,6 +177,7 @@ DEPENDENCIES
   devise
   httparty
   listen (~> 3.3)
+  nokogiri (>= 1.12.5)
   oj
   pg (~> 1.1)
   puma (~> 5.0)
