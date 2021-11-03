@@ -36,8 +36,7 @@ require './lib/apis/google_places/errors'
     end
 
     def construct_location(location)
-      debugger
-      raise FindPlaceAPIError.new('Rectangle geometry invalid.') unless %i[:south :west :north :east].all? {|s| location.key? s}
+      raise FindPlaceAPIError.new('Rectangle geometry invalid.') unless location.keys.sort == ["south", "west", "north", "east"].sort
       @query_params << ["locationbias", "rectangle:#{location[:south]},#{location[:west]}|#{location[:north]},#{location[:east]}"]
     end
 
