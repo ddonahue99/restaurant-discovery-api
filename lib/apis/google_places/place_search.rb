@@ -2,12 +2,17 @@ require './lib/apis/google_places/find_place'
 
 module GooglePlaces
   class PlaceSearch
-    BASE_URL = 'https://maps.googleapis.com/maps/api'
     include FindPlace
 
+    BASE_URL = 'https://maps.googleapis.com/maps/api'.freeze
+
     def initialize
+      @query_params = []
       check_api_key
-      @base_url = BASE_URL
+    end
+
+    def base_url
+      BASE_URL
     end
 
     def check_api_key
