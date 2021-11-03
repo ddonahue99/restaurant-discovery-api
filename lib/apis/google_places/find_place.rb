@@ -1,5 +1,6 @@
 require 'httparty'
 require 'oj'
+require './lib/apis/google_places/errors'
 
   module FindPlace
     include HTTParty
@@ -9,7 +10,10 @@ require 'oj'
 
     # Call find_places endpoints
     #
+    # @param keyword [String] for text query
+    # @param location [Hash] of N/E/S/W coordinates for rectangle
     # @return [Hash]
+    # @see https://developers.google.com/maps/documentation/places/web-service/search-find-place
     def find_place(keyword, location={})
       url = build_url(keyword, location)
       HTTParty.get(url).parsed_response
@@ -25,16 +29,15 @@ require 'oj'
     end
 
     def construct_textquery(keyword)
-      unless keyword
-        raise StandardError.new('No keyword provided.')
-      end
+      raise FindPlaceAPIError.new('No keyword provided.') if keyword.blank?
 
       @query_params << ["input", keyword]
       @query_params << ["inputtype", "textquery"]
     end
 
     def construct_location(location)
-      return nil unless %i[:south :west :north :east].all? {|s| location.key? s}
+      debugger
+      raise FindPlaceAPIError.new('Rectangle geometry invalid.') unless %i[:south :west :north :east].all? {|s| location.key? s}
       @query_params << ["locationbias", "rectangle:#{location[:south]},#{location[:west]}|#{location[:north]},#{location[:east]}"]
     end
 

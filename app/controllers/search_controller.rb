@@ -8,8 +8,13 @@ class SearchController < ApplicationController
     end
 
     api = GooglePlaces::PlaceSearch.new()
-    @response = api.find_place(params[:keyword], Oj.load(params[:location]))
-    render json: @response
+    
+    begin
+      @response = api.find_place(params[:keyword], Oj.load(params[:location]))
+      render json: @response
+    rescue StandardError => error
+      render json: {error: error}.to_json, status: 400
+    end
   end
 
   private
